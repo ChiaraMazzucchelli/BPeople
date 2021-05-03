@@ -1,11 +1,12 @@
 import os
+import argparse
+
 import pandas as pd
 import cv2
 from utils import cropping_images
 from skin_color_extractor import skin_color_extractor
 from hair_color_extractor import hair_color_extractor
 from eye_color_extractor import eye_color_extractor
-import random
 
 
 def extract_color_skin_hair(img_path):
@@ -79,3 +80,14 @@ def extract_all_colors(dataset_path, csv_path, new_csv_path, new_csv_name):
     path = new_csv_path + '\\' + new_csv_name + '.csv'
     dataset.to_csv(path, index=False)
     print('Dataset creato correttamente nella directory ' + path)
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('--images_path', help="path della cartella da dove prendere le immagini")
+parser.add_argument('--origin_path', help="path del csv di origine")
+parser.add_argument('--new_path', help="path di destinazione del nuovo csv")
+parser.add_argument('--new_name', help="nome del nuovo csv")
+args = parser.parse_args()
+
+extract_all_colors(args.images_path, args.origin_path, args.new_path, args.new_name)

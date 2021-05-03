@@ -1,6 +1,6 @@
 import cv2
 import keras
-from tensorflow.python.client import device_lib
+# from tensorflow.python.client import device_lib
 import pandas as pd
 import os
 
@@ -22,12 +22,6 @@ def resize_image():
 
 
 if __name__ == '__main__':
-    print(device_lib.list_local_devices())
-    # resize_image()
-    # config = tf.ConfigProto(device_count={'GPU': 1, 'CPU': 56})
-    # sess = tf.Session(config=config)
-    # keras.backend.set_session(sess)
-
     image_path = 'ResizedImages/10.jpg'
     images_path = 'ResizedImages'
     csv_path = 'dataset_new.csv'

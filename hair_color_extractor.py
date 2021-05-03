@@ -58,16 +58,5 @@ def hair_color_extractor(image, threshold=0.85):  # immagine in formato BGR
 
     _, mask = transfer(image_hair, mask, threshold)     # mask è in formato RGB
 
-    mask = cv2.cvtColor(mask, cv2.COLOR_RGB2BGR)
-    mask = PIL.Image.fromarray(mask)
-    mask.show()
-    colors, _ = extcolors.extract_from_image(mask)
-    print(colors)
-
-    most_frequent_color = colors[0]
-    if (0, 0, 0) in colors[0]:
-        print("Cambiato colore")
-        most_frequent_color = colors[1]
-
-    dominant_color = most_frequent_color[0]
-    return dominant_color[2],  dominant_color[1],  dominant_color[0]
+    frequent_color = dominant_color(mask)
+    return frequent_color[2],  frequent_color[1],  frequent_color[0]

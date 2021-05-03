@@ -61,6 +61,7 @@ def cropping_images(image_path, factor=1):
     return image_cropped
 
 
+"""
 def dominant_color(array):
     data = np.reshape(array, (-1, 3))
     # print(data.shape)
@@ -73,3 +74,20 @@ def dominant_color(array):
     print('Dominant color is: BGR({})'.format(centers[0].astype(np.int32)))
     array = centers[0]
     return array
+"""
+
+
+def dominant_color(mask):
+    mask = cv2.cvtColor(mask, cv2.COLOR_RGB2BGR)
+    mask = PIL.Image.fromarray(mask)
+    mask.show()
+    colors, _ = extcolors.extract_from_image(mask)
+    print(colors)
+
+    most_frequent_color = colors[0]
+    if (0, 0, 0) in colors[0]:
+        print("Cambiato colore")
+        most_frequent_color = colors[1]
+
+    color = most_frequent_color[0]
+    return color
