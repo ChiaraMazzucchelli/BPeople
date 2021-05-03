@@ -55,8 +55,8 @@ def cropping_images(image_path, factor=1):
 
     image_cropped = image[0:bottom, left:right]  # crop dell'immagine
 
-    cv2.imshow('mask', image_cropped)
-    cv2.waitKey(0)
+    # cv2.imshow('mask', image_cropped)
+    # cv2.waitKey(0)
 
     return image_cropped
 

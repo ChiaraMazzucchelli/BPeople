@@ -13,5 +13,7 @@ import face_recognition
 import PIL
 # from collections import Counter
 # from sklearn.cluster import KMeans
+
+! pip install extcolors
 import extcolors
 import glob

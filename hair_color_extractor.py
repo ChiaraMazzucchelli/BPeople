@@ -50,8 +50,8 @@ def transfer(image, mask, threshold):
 def hair_color_extractor(image, threshold=0.85):  # immagine in formato BGR
     image_hair = np.uint8(image)
     image_hair = cv2.cvtColor(image_hair, cv2.COLOR_BGR2RGB)  # conversione in RGB
-    cv2.imshow('image hair', image_hair)
-    cv2.waitKey(0)
+    # cv2.imshow('image hair', image_hair)
+    # cv2.waitKey(0)
     model = keras.models.load_model('hair_model.hdf5')
 
     mask = predict(image_hair, model, color='RGB')

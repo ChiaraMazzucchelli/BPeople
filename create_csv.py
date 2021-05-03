@@ -18,8 +18,8 @@ def extract_color_skin_hair(img_path):
 
 def extract_color_eye(img_path):
     img = cv2.imread(img_path)  # immagine in formato RGB
-    cv2.imshow('img', img)
-    cv2.waitKey(0)
+    # cv2.imshow('img', img)
+    # cv2.waitKey(0)
     # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     r, g, b = eye_color_extractor(img)
     return r, g, b
