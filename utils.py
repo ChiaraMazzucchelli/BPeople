@@ -5,6 +5,7 @@ import face_recognition
 import glob
 from PIL import Image
 import numpy as np
+import extcolors
 import pandas as pd
 import csv
 import shutil
@@ -79,8 +80,8 @@ def dominant_color(array):
 
 def dominant_color(mask):
     mask = cv2.cvtColor(mask, cv2.COLOR_RGB2BGR)
-    mask = PIL.Image.fromarray(mask)
-    mask.show()
+    mask = Image.fromarray(mask)
+    # mask.show()
     colors, _ = extcolors.extract_from_image(mask)
     print(colors)
 
