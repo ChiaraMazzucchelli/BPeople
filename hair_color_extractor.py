@@ -56,7 +56,7 @@ def hair_color_extractor(image, threshold=0.85):  # immagine in formato BGR
 
     mask = predict(image_hair, model, color='RGB')
 
-    _, mask = transfer(image_hair, mask, threshold)     # mask è in formato RGB
+    mask, _ = transfer(image_hair, mask, threshold)     # mask è in formato RGB
 
     frequent_color = dominant_color(mask)
     return frequent_color[2],  frequent_color[1],  frequent_color[0]

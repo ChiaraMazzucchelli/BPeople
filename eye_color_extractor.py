@@ -34,5 +34,5 @@ def eye_color_extractor(image):
             else:
                 array.append(image[y, x, :])
 
-    array = dominant_color(image)
+    array = dominant_color(array)
     return array[2], array[1], array[0]

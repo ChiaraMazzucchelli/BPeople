@@ -29,9 +29,9 @@ def extract_colors(image_path):
 
     skin_r, skin_g, skin_b, hair_r, hair_g, hair_b = extract_color_skin_hair(image_path)
     eye_r, eye_g, eye_b = extract_color_eye(image_path)
-    print("Colore pelle:  ( " + skin_r + ", " + skin_g + ", " + skin_b + " )")
-    print("Colore capelli:  ("+ hair_r + ", " + hair_g + ", " + hair_b + " )")
-    print("Colore occhi:  (" + eye_r + ", " + eye_g + ", " + eye_b + " )")
+    print("Colore pelle:  ( " + str(skin_r) + ", " + str(skin_g) + ", " + str(skin_b) + " )")
+    print("Colore capelli:  (" + str(hair_r) + ", " + str(hair_g) + ", " + str(hair_b) + " )")
+    print("Colore occhi:  (" + str(eye_r) + ", " + str(eye_g) + ", " + str(eye_b) + " )")
 
 
 parser = argparse.ArgumentParser()
