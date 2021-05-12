@@ -27,6 +27,7 @@ def eye_color_extractor(image):
     cv2.circle(image, right_eye, int(eye_radius), (0, 155, 255), 1)
 
     array = []
+    image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
     for y in range(0, h):
         for x in range(0, w):
             if img_mask[y, x] == 0:
