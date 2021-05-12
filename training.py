@@ -93,6 +93,7 @@ def plot_confusion_matrix(cm, classes,
     plt.tight_layout()
     plt.ylabel('True label', size=18)
     plt.xlabel('Predicted label', size=18)
+    plt.show()
 
 
 def evaluate_model(y_test, y_pred, train, model):
