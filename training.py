@@ -13,7 +13,7 @@ import argparse
 
 def preprocessing_data(path):
     df = pd.read_csv(path)
-    dataset = df.loc(df["Skin_R"] == 0)
+    dataset = df[df.Skin_R != 0]
     data = dataset.drop(columns=["Extension", "Season", "Subgroup"])
     labels = np.array(dataset.pop('Season'))
     return data, labels
