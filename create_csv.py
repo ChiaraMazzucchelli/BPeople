@@ -10,17 +10,15 @@ from eye_color_extractor import eye_color_extractor
 
 
 def extract_color_skin_hair(img_path):
-    image = cropping_images(img_path, factor=1.3)
-    rs, gs, bs = skin_color_extractor(image, color='BGR')
+    image = cropping_images(img_path, factor=1.3) #image è in RGB
+    rs, gs, bs = skin_color_extractor(image) # questo va bene
     rh, gh, bh = hair_color_extractor(image)
     return rs, gs, bs, rh, gh, bh
 
 
 def extract_color_eye(img_path):
-    img = cv2.imread(img_path)  # immagine in formato RGB
-    # cv2.imshow('img', img)
-    # cv2.waitKey(0)
-    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.imread(img_path)  # immagine in formato BGR
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     r, g, b = eye_color_extractor(img)
     return r, g, b
 
@@ -43,7 +41,7 @@ def extract_all_colors(dataset_path, csv_path, new_csv_path, new_csv_name):
         ext = dataset._get_value(row, 'Extension')
         path = str(name) + '.' + ext
         print('Image = ' + path)
-        if name in {26, 37, 49, 68, 74, 87, 94, 95, 103, 108}:
+        if name in {26, 37, 49, 68, 74, 87, 94, 95, 103, 108, 112}:
             skin_red.append(0)
             skin_green.append(0)
             skin_blue.append(0)

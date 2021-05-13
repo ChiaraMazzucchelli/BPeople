@@ -10,28 +10,25 @@ from eye_color_extractor import eye_color_extractor
 
 
 def extract_color_skin_hair(img_path):
-    image = cropping_images(img_path, factor=1.3)
-    rs, gs, bs = skin_color_extractor(image, color='BGR')
+    image = cropping_images(img_path, factor=1.3)  # image è in RGB
+    rs, gs, bs = skin_color_extractor(image)  # questo va bene
     rh, gh, bh = hair_color_extractor(image)
     return rs, gs, bs, rh, gh, bh
 
 
 def extract_color_eye(img_path):
-    img = cv2.imread(img_path)  # immagine in formato RGB
-    # cv2.imshow('img', img)
-    # cv2.waitKey(0)
-    # img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.imread(img_path)  # immagine in formato BGR
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     r, g, b = eye_color_extractor(img)
     return r, g, b
 
 
 def extract_colors(image_path):
-
     skin_r, skin_g, skin_b, hair_r, hair_g, hair_b = extract_color_skin_hair(image_path)
     eye_r, eye_g, eye_b = extract_color_eye(image_path)
     print("Colore pelle:  ( " + str(skin_r) + ", " + str(skin_g) + ", " + str(skin_b) + " )")
-    print("Colore capelli:  (" + str(hair_r) + ", " + str(hair_g) + ", " + str(hair_b) + " )")
-    print("Colore occhi:  (" + str(eye_r) + ", " + str(eye_g) + ", " + str(eye_b) + " )")
+    print("Colore capelli:  ( " + str(hair_r) + ", " + str(hair_g) + ", " + str(hair_b) + " )")
+    print("Colore occhi:  ( " + str(eye_r) + ", " + str(eye_g) + ", " + str(eye_b) + " )")
 
 
 parser = argparse.ArgumentParser()

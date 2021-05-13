@@ -2,7 +2,6 @@ import PIL.Image
 import cv2
 import numpy as np
 import keras
-import extcolors
 from utils import cropping_images
 from utils import dominant_color
 
@@ -47,16 +46,16 @@ def transfer(image, mask, threshold):
     return array, result
 
 
-def hair_color_extractor(image, threshold=0.85):  # immagine in formato BGR
+def hair_color_extractor(image, threshold=0.85):  # immagine in formato RGB
     image_hair = np.uint8(image)
-    image_hair_rgb = cv2.cvtColor(image_hair, cv2.COLOR_BGR2RGB)  # conversione in RGB
+    #image_hair_rgb = cv2.cvtColor(image_hair, cv2.COLOR_BGR2RGB)  # conversione in RGB
     # cv2.imshow('image hair', image_hair)
     # cv2.waitKey(0)
-    model = keras.models.load_model('hair_model.hdf5')
+    model = keras.models.load_model('/content/gdrive/MyDrive/Tesi Magistrale/hair_model.hdf5')
 
-    mask = predict(image_hair_rgb, model, color='RGB')
+    mask = predict(image_hair, model, color='RGB')
 
-    mask, _ = transfer(image_hair, mask, threshold)     # mask è in formato BGR (array)
+    mask, _ = transfer(image_hair, mask, threshold)     # mask è in formato RGB (array)
 
     frequent_color = dominant_color(mask)
-    return frequent_color[2],  frequent_color[1],  frequent_color[0]
+    return frequent_color[0],  frequent_color[1],  frequent_color[2]
