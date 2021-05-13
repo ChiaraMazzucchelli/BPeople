@@ -14,7 +14,7 @@ import argparse
 def preprocessing_data(path):
     df = pd.read_csv(path)
     dataset = df[df.Skin_R != 0]
-    data = dataset.drop(columns=["Extension", "Season", "Subgroup"])
+    data = dataset.drop(columns=["ID", "Extension", "Season", "Subgroup"])
     labels = np.array(dataset.pop('Season'))
     return data, labels
 
@@ -22,7 +22,7 @@ def preprocessing_data(path):
 def training(x, label, type='random_forest', random_state=None):
     train, test, train_labels, test_labels = train_test_split(x, label,
                                                               stratify=label,
-                                                              test_size=0.3,
+                                                              test_size=0.2,
                                                               random_state=random_state)
 
     if type == 'random_forest':
@@ -96,16 +96,17 @@ def plot_confusion_matrix(cm, classes,
     plt.show()
 
 
-def evaluate_model(y_test, y_pred, train, model):
+def evaluate_model(y_test, y_pred, train, model, type):
     print(classification_report(y_test, y_pred))
     cm = confusion_matrix(y_test, y_pred)
     plot_confusion_matrix(cm, classes=['Autumn', 'Spring', 'Summer', 'Winter'],
                           title='Season Confusion Matrix')
-    features = list(train.columns)
-    fi_model = pd.DataFrame({'feature': features,
-                             'importance': model.feature_importances_}). \
-        sort_values('importance', ascending=False)
-    fi_model.head(10)
+    if type == "random_forest":
+        features = list(train.columns)
+        fi_model = pd.DataFrame({'feature': features,
+                                 'importance': model.feature_importances_}). \
+            sort_values('importance', ascending=False)
+        print(fi_model.head(10))
 
 
 def create_model(csv_path, type):
@@ -114,7 +115,7 @@ def create_model(csv_path, type):
     # type = 'random_forest'
     model, X_train, X_test, y_test = training(x, label, type, random_state=None)
     y_pred = model.predict(X_test)
-    evaluate_model(y_test, y_pred, X_train, model)
+    evaluate_model(y_test, y_pred, X_train, model,type)
 
 
 parser = argparse.ArgumentParser()
