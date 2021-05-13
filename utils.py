@@ -5,7 +5,6 @@ import face_recognition
 import glob
 from PIL import Image
 import numpy as np
-import extcolors
 import pandas as pd
 import csv
 import shutil
